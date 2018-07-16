@@ -7,7 +7,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>Plugin for generating Java 9+ module file</name>
 	<prerequisites>
-		<maven>3.4</maven>
+		<maven>${mavenVersion}</maven>
 	</prerequisites>
 
 	<repositories>
@@ -31,7 +31,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mavenVersion>3.0</mavenVersion>
+		<mavenVersion>3.4</mavenVersion>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -65,21 +65,21 @@
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
-			<version>${mavenVersion}</version>
+			<version>3.0</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-core</artifactId>
-			<version>${mavenVersion}</version>
+			<version>3.0</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-artifact</artifactId>
-			<version>${mavenVersion}</version>
+			<version>3.0</version>
 			<scope>provided</scope>
 		</dependency>
 
