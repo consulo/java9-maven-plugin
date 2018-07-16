@@ -15,14 +15,33 @@ public class ModuleInfo
 	{
 		public String module;
 		public boolean transitive;
-		@Parameter(name = "static")
-		public boolean _static;
+
+		private boolean _static;
+
+		public void setStatic(boolean value)
+		{
+			_static = value;
+		}
+
+		public boolean isStatic()
+		{
+			return _static;
+		}
 	}
 
 	public static class Export
 	{
-		@Parameter(name = "package")
-		public String _package;
+		private String _package;
+
+		public String getPackage()
+		{
+			return _package;
+		}
+
+		public void setPackage(String value)
+		{
+			_package = value;
+		}
 	}
 
 	public String name;
