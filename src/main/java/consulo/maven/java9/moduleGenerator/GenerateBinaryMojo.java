@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.util.IOUtil;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.ModuleVisitor;
@@ -15,7 +14,7 @@ import org.objectweb.asm.Opcodes;
  * @author VISTALL
  * @since 2018-07-16
  */
-@Mojo(name = "generate-binary-module-info", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_CLASSES, requiresDependencyResolution = ResolutionScope.NONE)
+@Mojo(name = "generate-binary-module-info", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateBinaryMojo extends GenerateMojo
 {
 	@Override
@@ -38,14 +37,14 @@ public class GenerateBinaryMojo extends GenerateMojo
 		for(ModuleInfo.Require require : target.requires)
 		{
 			boolean isTransitive = require.transitive;
-			boolean isStatic = require._static;
+			boolean isStatic = require.isStatic();
 
 			moduleVisitor.visitRequire(require.module, (isTransitive ? Opcodes.ACC_TRANSITIVE : 0) | (isStatic ? Opcodes.ACC_STATIC_PHASE : 0), null);
 		}
 
 		for(ModuleInfo.Export export : target.exports)
 		{
-			moduleVisitor.visitExport(export._package.replace(".", "/"), 0);
+			moduleVisitor.visitExport(export.getPackage().replace(".", "/"), 0);
 		}
 
 		moduleVisitor.visitEnd();

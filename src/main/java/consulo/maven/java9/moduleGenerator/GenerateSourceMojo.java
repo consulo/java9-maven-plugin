@@ -13,7 +13,7 @@ import org.codehaus.plexus.util.IOUtil;
  * @author VISTALL
  * @since 2018-07-16
  */
-@Mojo(name = "generate-source-module-info", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.NONE)
+@Mojo(name = "generate-source-module-info", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class GenerateSourceMojo extends GenerateMojo
 {
 	@Override
@@ -71,7 +71,7 @@ public class GenerateSourceMojo extends GenerateMojo
 				builder.append("transitive ");
 			}
 
-			if(require._static)
+			if(require.isStatic())
 			{
 				builder.append("static ");
 			}
@@ -83,7 +83,7 @@ public class GenerateSourceMojo extends GenerateMojo
 		{
 			builder.append("    ");
 			builder.append("exports ");
-			builder.append(export._package);
+			builder.append(export.getPackage());
 			builder.append(";\n");
 		}
 
