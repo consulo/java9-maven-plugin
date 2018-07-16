@@ -15,13 +15,13 @@ public class ModuleInfo
 	{
 		public String module;
 		public boolean transitive;
-		@Parameter(alias = "static")
+		@Parameter(name = "static")
 		public boolean _static;
 	}
 
 	public static class Export
 	{
-		@Parameter(alias = "package")
+		@Parameter(name = "package")
 		public String _package;
 	}
 

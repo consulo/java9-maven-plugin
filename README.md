@@ -17,16 +17,16 @@ This plugin will helps migration from Java 8 to Java 9. It will generate module-
 	<artifactId>untitled4</artifactId>
 	<version>1.0</version>
 
-	<repositories>
-		<repository>
+	<pluginRepositories>
+		<pluginRepository>
 			<id>consulo</id>
 			<url>https://maven.consulo.io/repository/snapshots/</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
-		</repository>
-	</repositories>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<build>
 		<plugins>

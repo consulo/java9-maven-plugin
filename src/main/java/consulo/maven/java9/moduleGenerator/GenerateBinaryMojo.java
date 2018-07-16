@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.util.IOUtil;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.ModuleVisitor;
@@ -14,7 +15,7 @@ import org.objectweb.asm.Opcodes;
  * @author VISTALL
  * @since 2018-07-16
  */
-@Mojo(name = "generate-binary-module-info", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
+@Mojo(name = "generate-binary-module-info", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_CLASSES, requiresDependencyResolution = ResolutionScope.NONE)
 public class GenerateBinaryMojo extends GenerateMojo
 {
 	@Override

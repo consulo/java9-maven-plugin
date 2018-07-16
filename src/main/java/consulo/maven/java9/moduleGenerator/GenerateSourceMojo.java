@@ -5,6 +5,7 @@ import java.io.FileWriter;
 
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
 
@@ -12,7 +13,7 @@ import org.codehaus.plexus.util.IOUtil;
  * @author VISTALL
  * @since 2018-07-16
  */
-@Mojo(name = "generate-source-module-info", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+@Mojo(name = "generate-source-module-info", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.NONE)
 public class GenerateSourceMojo extends GenerateMojo
 {
 	@Override
