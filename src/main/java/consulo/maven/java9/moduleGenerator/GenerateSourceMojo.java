@@ -84,6 +84,7 @@ public class GenerateSourceMojo extends GenerateMojo
 			builder.append("    ");
 			builder.append("exports ");
 			builder.append(export._package);
+			builder.append(";\n");
 		}
 
 		builder.append("\n}");
