@@ -34,12 +34,17 @@ public class GenerateBinaryMojo extends GenerateMojo
 
 		moduleVisitor.visitRequire("java.base", Opcodes.ACC_MANDATED, null);
 
-		for(ModuleInfo.Requires require : target.requires)
+		for(ModuleInfo.Require require : target.requires)
 		{
 			boolean isTransitive = require.transitive;
 			boolean isStatic = require._static;
 
-			moduleVisitor.visitRequire(require.name, (isTransitive ? Opcodes.ACC_TRANSITIVE : 0) | (isStatic ? Opcodes.ACC_STATIC_PHASE : 0), null);
+			moduleVisitor.visitRequire(require.module, (isTransitive ? Opcodes.ACC_TRANSITIVE : 0) | (isStatic ? Opcodes.ACC_STATIC_PHASE : 0), null);
+		}
+
+		for(ModuleInfo.Export export : target.exports)
+		{
+			moduleVisitor.visitExport(export._package.replace(".", "/"), 0);
 		}
 
 		moduleVisitor.visitEnd();

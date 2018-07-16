@@ -11,12 +11,18 @@ import org.apache.maven.plugins.annotations.Parameter;
  */
 public class ModuleInfo
 {
-	public static class Requires
+	public static class Require
 	{
-		public String name;
+		public String module;
 		public boolean transitive;
 		@Parameter(alias = "static")
 		public boolean _static;
+	}
+
+	public static class Export
+	{
+		@Parameter(alias = "package")
+		public String _package;
 	}
 
 	public String name;
@@ -24,5 +30,8 @@ public class ModuleInfo
 	public boolean open = false;
 
 	@Parameter(alias = "requires")
-	public List<Requires> requires = new ArrayList<>();
+	public List<Require> requires = new ArrayList<>();
+
+	@Parameter(alias = "exports")
+	public List<Export> exports = new ArrayList<>();
 }

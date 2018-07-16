@@ -2,7 +2,6 @@ package consulo.maven.java9.moduleGenerator;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.List;
 
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -62,8 +61,7 @@ public class GenerateSourceMojo extends GenerateMojo
 
 		builder.append("module ").append(target.name).append(" {\n");
 
-		List<ModuleInfo.Requires> requires = target.requires;
-		for(ModuleInfo.Requires require : requires)
+		for(ModuleInfo.Require require : target.requires)
 		{
 			builder.append("    ");
 			builder.append("requires ");
@@ -76,8 +74,15 @@ public class GenerateSourceMojo extends GenerateMojo
 			{
 				builder.append("static ");
 			}
-			builder.append(require.name);
+			builder.append(require.module);
 			builder.append(";\n");
+		}
+
+		for(ModuleInfo.Export export : target.exports)
+		{
+			builder.append("    ");
+			builder.append("exports ");
+			builder.append(export._package);
 		}
 
 		builder.append("\n}");

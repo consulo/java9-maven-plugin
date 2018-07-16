@@ -51,7 +51,7 @@ This plugin will helps migration from Java 8 to Java 9. It will generate module-
 						<name>untitled</name>
 						<requires>
 							<require>
-								<name>org.objectweb.asm</name>
+								<module>org.objectweb.asm</module>
 								<transitive>true</transitive>
 							</require>
 						</requires>
