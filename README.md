@@ -41,7 +41,7 @@ This plugin will helps migration from Java 8 to Java 9. It will generate module-
 			</plugin>
 
 			<plugin>
-				<groupId>consulo.internal</groupId>
+				<groupId>consulo.maven</groupId>
 				<artifactId>java9-maven-plugin</artifactId>
 				<version>1.0-SNAPSHOT</version>
 				<extensions>true</extensions>
