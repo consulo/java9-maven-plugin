@@ -5,7 +5,6 @@ import java.io.FileWriter;
 
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
 
@@ -27,7 +26,7 @@ public class GenerateSourceMojo extends GenerateMojo
 			FileUtils.deleteDirectory(outputSourceDirectory);
 		}
 
-		if(!isJdk9OrHighter())
+		if(!isIgnored())
 		{
 			return;
 		}
@@ -49,6 +48,12 @@ public class GenerateSourceMojo extends GenerateMojo
 		{
 			IOUtil.close(out);
 		}
+	}
+
+	@Override
+	protected boolean isIgnored()
+	{
+		return !isJdk9OrHighter();
 	}
 
 	private String generateModuleInfo(ModuleInfo target)

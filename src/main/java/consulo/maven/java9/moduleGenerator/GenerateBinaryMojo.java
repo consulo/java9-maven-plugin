@@ -20,7 +20,7 @@ public class GenerateBinaryMojo extends GenerateMojo
 	@Override
 	protected void executeImpl(ModuleInfo target) throws Exception
 	{
-		if(isJdk9OrHighter())
+		if(isIgnored())
 		{
 			return;
 		}
@@ -64,5 +64,11 @@ public class GenerateBinaryMojo extends GenerateMojo
 		{
 			IOUtil.close(out);
 		}
+	}
+
+	@Override
+	protected boolean isIgnored()
+	{
+		return isJdk9OrHighter();
 	}
 }

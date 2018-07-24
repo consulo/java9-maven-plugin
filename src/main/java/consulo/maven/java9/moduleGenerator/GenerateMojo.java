@@ -36,6 +36,11 @@ public abstract class GenerateMojo extends AbstractMojo
 		}
 	}
 
+	protected boolean isIgnored()
+	{
+		return false;
+	}
+
 	protected boolean isJdk9OrHighter()
 	{
 		try

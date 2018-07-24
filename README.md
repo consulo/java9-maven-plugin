@@ -4,6 +4,12 @@
 
 This plugin will helps migration from Java 8 to Java 9. It will generate module-info.class file while Java 8 compilation, which will be usable while Java 9 compilation. At Java 8 file will be ignored
 
+## Goals
+ *  `generate-source-module-info` - generate source module info, and add it to generated source directory (**ignored if running in pre java 9 jdk**)
+ *  `generate-source-module-info-nocheck` - generate source module info without JDK check
+ *  `generate-binary-module-info` - generate binary module info, and add it to build directory (**ignored if running in java 9+ jdk**)
+ *  `generate-binary-module-info-nocheck` - generate binary module info without JDK check
+
 ## Usage example
 
 ```xml
@@ -66,7 +72,7 @@ This plugin will helps migration from Java 8 to Java 9. It will generate module-
 						</goals>
 					</execution>
 					<execution>
-						<id>java8</id>
+						<id>pre-java9</id>
 						<phase>process-classes</phase>
 						<goals>
 							<goal>generate-binary-module-info</goal>
