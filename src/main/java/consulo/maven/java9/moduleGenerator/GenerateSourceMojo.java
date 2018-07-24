@@ -26,7 +26,7 @@ public class GenerateSourceMojo extends GenerateMojo
 			FileUtils.deleteDirectory(outputSourceDirectory);
 		}
 
-		if(!isIgnored())
+		if(isIgnored())
 		{
 			return;
 		}
