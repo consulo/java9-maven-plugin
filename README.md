@@ -18,7 +18,7 @@ You can declarate module in few ways.
 Via module-info.java file in  src/main directory
 
 ```java
-open module untitled{
+open module untitled {
 	requires transitive org.objectweb.asm;
 }
 ```
@@ -29,23 +29,23 @@ Via plugin configuration
 
 ```xml
 <plugin>
-				<groupId>consulo.maven</groupId>
-				<artifactId>java9-maven-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
-				<extensions>true</extensions>
-				<configuration>
-					<module>
-						<open>true</open>
-						<name>untitled</name>
-						<requires>
-							<require>
-								<module>org.objectweb.asm</module>
-								<transitive>true</transitive>
-							</require>
-						</requires>
-					</module>
-				</configuration>
-			</plugin>
+	<groupId>consulo.maven</groupId>
+	<artifactId>java9-maven-plugin</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<extensions>true</extensions>
+	<configuration>
+		<module>
+			<open>true</open>
+			<name>untitled</name>
+			<requires>
+				<require>
+					<module>org.objectweb.asm</module>
+					<transitive>true</transitive>
+				</require>
+			</requires>
+		</module>
+	</configuration>
+</plugin>
 
 ```
 
