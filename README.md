@@ -90,7 +90,7 @@ Via plugin configuration
 				<artifactId>java9-maven-plugin</artifactId>
 				<version>1.0-SNAPSHOT</version>
 				<extensions>true</extensions>
-				<!--optional if no module-info in src/main
+				<!--required if no module-info.java in ${project.basedir}/src/main/
 				<configuration>
 					<module>
 						<open>true</open>
