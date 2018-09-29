@@ -9,6 +9,7 @@ import org.codehaus.plexus.util.IOUtil;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.ModuleVisitor;
 import org.objectweb.asm.Opcodes;
+import consulo.maven.java9.moduleGenerator.moduleInfo.ModuleInfo;
 
 /**
  * @author VISTALL
@@ -30,19 +31,19 @@ public class GenerateBinaryMojo extends GenerateMojo
 		ClassWriter classWriter = new ClassWriter(0);
 		classWriter.visit(Opcodes.V9, Opcodes.ACC_MODULE, "module-info", null, null, null);
 
-		ModuleVisitor moduleVisitor = classWriter.visitModule(target.name, target.open ? Opcodes.ACC_OPEN : 0, null);
+		ModuleVisitor moduleVisitor = classWriter.visitModule(target.getName(), target.isOpen() ? Opcodes.ACC_OPEN : 0, null);
 
 		moduleVisitor.visitRequire("java.base", Opcodes.ACC_MANDATED, null);
 
-		for(ModuleInfo.Require require : target.requires)
+		for(ModuleInfo.Require require : target.getRequires())
 		{
-			boolean isTransitive = require.transitive;
+			boolean isTransitive = require.isTransitive();
 			boolean isStatic = require.isStatic();
 
-			moduleVisitor.visitRequire(require.module, (isTransitive ? Opcodes.ACC_TRANSITIVE : 0) | (isStatic ? Opcodes.ACC_STATIC_PHASE : 0), null);
+			moduleVisitor.visitRequire(require.getModule(), (isTransitive ? Opcodes.ACC_TRANSITIVE : 0) | (isStatic ? Opcodes.ACC_STATIC_PHASE : 0), null);
 		}
 
-		for(ModuleInfo.Export export : target.exports)
+		for(ModuleInfo.Export export : target.getExports())
 		{
 			moduleVisitor.visitExport(export.getPackage().replace(".", "/"), 0);
 		}

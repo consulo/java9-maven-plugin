@@ -7,6 +7,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
+import consulo.maven.java9.moduleGenerator.moduleInfo.ModuleInfo;
 
 /**
  * @author VISTALL
@@ -56,22 +57,22 @@ public class GenerateSourceMojo extends GenerateMojo
 		return !isJdk9OrHighter();
 	}
 
-	private String generateModuleInfo(ModuleInfo target)
+	public static String generateModuleInfo(ModuleInfo target)
 	{
 		StringBuilder builder = new StringBuilder();
 
-		if(target.open)
+		if(target.isOpen())
 		{
 			builder.append("open ");
 		}
 
-		builder.append("module ").append(target.name).append(" {\n");
+		builder.append("module ").append(target.getName()).append(" {\n");
 
-		for(ModuleInfo.Require require : target.requires)
+		for(ModuleInfo.Require require : target.getRequires())
 		{
 			builder.append("    ");
 			builder.append("requires ");
-			if(require.transitive)
+			if(require.isTransitive())
 			{
 				builder.append("transitive ");
 			}
@@ -80,11 +81,11 @@ public class GenerateSourceMojo extends GenerateMojo
 			{
 				builder.append("static ");
 			}
-			builder.append(require.module);
+			builder.append(require.getModule());
 			builder.append(";\n");
 		}
 
-		for(ModuleInfo.Export export : target.exports)
+		for(ModuleInfo.Export export : target.getExports())
 		{
 			builder.append("    ");
 			builder.append("exports ");

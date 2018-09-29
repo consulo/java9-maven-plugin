@@ -1,4 +1,4 @@
-package consulo.maven.java9.moduleGenerator;
+package consulo.maven.java9.moduleGenerator.moduleInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author VISTALL
  * @since 2018-07-16
  */
-public class ModuleInfo
+public class XmlModuleInfo implements ModuleInfo
 {
-	public static class Require
+	public static class Require implements ModuleInfo.Require
 	{
 		public String module;
 		public boolean transitive;
@@ -23,16 +23,30 @@ public class ModuleInfo
 			_static = value;
 		}
 
+		@Override
+		public String getModule()
+		{
+			return module;
+		}
+
+		@Override
 		public boolean isStatic()
 		{
 			return _static;
 		}
+
+		@Override
+		public boolean isTransitive()
+		{
+			return transitive;
+		}
 	}
 
-	public static class Export
+	public static class Export implements ModuleInfo.Export
 	{
 		private String _package;
 
+		@Override
 		public String getPackage()
 		{
 			return _package;
@@ -53,4 +67,28 @@ public class ModuleInfo
 
 	@Parameter(alias = "exports")
 	public List<Export> exports = new ArrayList<>();
+
+	@Override
+	public List<? extends ModuleInfo.Require> getRequires()
+	{
+		return requires;
+	}
+
+	@Override
+	public List<? extends ModuleInfo.Export> getExports()
+	{
+		return exports;
+	}
+
+	@Override
+	public String getName()
+	{
+		return name;
+	}
+
+	@Override
+	public boolean isOpen()
+	{
+		return open;
+	}
 }

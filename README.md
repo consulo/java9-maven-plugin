@@ -10,6 +10,45 @@ This plugin will helps migration from Java 8 to Java 9. It will generate module-
  *  `generate-binary-module-info` - generate binary module info, and add it to build directory (**ignored if running in java 9+ jdk**)
  *  `generate-binary-module-info-nocheck` - generate binary module info without JDK check
 
+## Module declaration
+
+You can declarate module in few ways.
+
+### First
+Via module-info.java file in  src/main directory
+
+```java
+open module untitled{
+	requires transitive org.objectweb.asm;
+}
+```
+
+### Second
+
+Via plugin configuration
+
+```xml
+<plugin>
+				<groupId>consulo.maven</groupId>
+				<artifactId>java9-maven-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<extensions>true</extensions>
+				<configuration>
+					<module>
+						<open>true</open>
+						<name>untitled</name>
+						<requires>
+							<require>
+								<module>org.objectweb.asm</module>
+								<transitive>true</transitive>
+							</require>
+						</requires>
+					</module>
+				</configuration>
+			</plugin>
+
+```
+
 ## Usage example
 
 ```xml
@@ -51,6 +90,7 @@ This plugin will helps migration from Java 8 to Java 9. It will generate module-
 				<artifactId>java9-maven-plugin</artifactId>
 				<version>1.0-SNAPSHOT</version>
 				<extensions>true</extensions>
+				<!--optional if no module-info in src/main
 				<configuration>
 					<module>
 						<open>true</open>
@@ -63,6 +103,7 @@ This plugin will helps migration from Java 8 to Java 9. It will generate module-
 						</requires>
 					</module>
 				</configuration>
+				-->
 				<executions>
 					<execution>
 						<id>java9</id>
