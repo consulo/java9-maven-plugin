@@ -50,7 +50,7 @@ public class GenerateBinaryMojo extends GenerateMojo
 
 		for(ModuleInfo.Use use : target.getUses())
 		{
-			moduleVisitor.visitUse("L" + use.getClassName().replace(".", "/") + ";");
+			moduleVisitor.visitUse(use.getClassName().replace(".", "/"));
 		}
 
 		moduleVisitor.visitEnd();
