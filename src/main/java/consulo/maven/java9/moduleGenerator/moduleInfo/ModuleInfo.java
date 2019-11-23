@@ -22,9 +22,16 @@ public interface ModuleInfo
 		String getPackage();
 	}
 
+	interface Use
+	{
+		String getClassName();
+	}
+
 	List<? extends Require> getRequires();
 
 	List<? extends Export> getExports();
+
+	List<? extends Use> getUses();
 
 	String getName();
 

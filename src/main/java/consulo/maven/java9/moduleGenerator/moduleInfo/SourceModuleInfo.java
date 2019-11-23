@@ -1,12 +1,9 @@
 package consulo.maven.java9.moduleGenerator.moduleInfo;
 
+import com.github.javaparser.ast.modules.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.github.javaparser.ast.modules.ModuleDeclaration;
-import com.github.javaparser.ast.modules.ModuleExportsStmt;
-import com.github.javaparser.ast.modules.ModuleRequiresStmt;
-import com.github.javaparser.ast.modules.ModuleStmt;
 
 /**
  * @author VISTALL
@@ -58,6 +55,22 @@ public class SourceModuleInfo implements ModuleInfo
 		}
 	}
 
+	private static class UseImpl implements Use
+	{
+		private ModuleUsesStmt myModuleUsesStmt;
+
+		private UseImpl(ModuleUsesStmt moduleUsesStmt)
+		{
+			myModuleUsesStmt = moduleUsesStmt;
+		}
+
+		@Override
+		public String getClassName()
+		{
+			return myModuleUsesStmt.getName().asString();
+		}
+	}
+
 	private ModuleDeclaration myModuleDeclaration;
 
 	public SourceModuleInfo(ModuleDeclaration moduleDeclaration)
@@ -88,6 +101,20 @@ public class SourceModuleInfo implements ModuleInfo
 			if(moduleStmt instanceof ModuleExportsStmt)
 			{
 				list.add(new ExportImpl((ModuleExportsStmt) moduleStmt));
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<? extends Use> getUses()
+	{
+		List<Use> list = new ArrayList<>();
+		for(ModuleStmt moduleStmt : myModuleDeclaration.getModuleStmts())
+		{
+			if(moduleStmt instanceof ModuleUsesStmt)
+			{
+				list.add(new UseImpl((ModuleUsesStmt) moduleStmt));
 			}
 		}
 		return list;

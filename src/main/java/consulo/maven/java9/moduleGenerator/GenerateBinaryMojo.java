@@ -1,15 +1,15 @@
 package consulo.maven.java9.moduleGenerator;
 
-import java.io.File;
-import java.io.FileOutputStream;
-
+import consulo.maven.java9.moduleGenerator.moduleInfo.ModuleInfo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.codehaus.plexus.util.IOUtil;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.ModuleVisitor;
 import org.objectweb.asm.Opcodes;
-import consulo.maven.java9.moduleGenerator.moduleInfo.ModuleInfo;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * @author VISTALL
@@ -46,6 +46,11 @@ public class GenerateBinaryMojo extends GenerateMojo
 		for(ModuleInfo.Export export : target.getExports())
 		{
 			moduleVisitor.visitExport(export.getPackage().replace(".", "/"), 0);
+		}
+
+		for(ModuleInfo.Use use : target.getUses())
+		{
+			moduleVisitor.visitUse(use.getClassName());
 		}
 
 		moduleVisitor.visitEnd();

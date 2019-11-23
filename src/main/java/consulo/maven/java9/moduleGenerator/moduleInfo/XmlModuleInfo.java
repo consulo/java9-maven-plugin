@@ -1,9 +1,10 @@
 package consulo.maven.java9.moduleGenerator.moduleInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.maven.plugins.annotations.Parameter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author VISTALL
@@ -78,6 +79,12 @@ public class XmlModuleInfo implements ModuleInfo
 	public List<? extends ModuleInfo.Export> getExports()
 	{
 		return exports;
+	}
+
+	@Override
+	public List<? extends Use> getUses()
+	{
+		return Collections.emptyList();
 	}
 
 	@Override
