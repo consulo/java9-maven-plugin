@@ -20,6 +20,8 @@ public interface ModuleInfo
 	interface Export
 	{
 		String getPackage();
+
+		String[] getModules();
 	}
 
 	interface Use

@@ -1,5 +1,7 @@
 package consulo.maven.java9.moduleGenerator.moduleInfo;
 
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.modules.*;
 
 import java.util.ArrayList;
@@ -52,6 +54,18 @@ public class SourceModuleInfo implements ModuleInfo
 		public String getPackage()
 		{
 			return myModuleExportsStmt.getNameAsString();
+		}
+
+		@Override
+		public String[] getModules()
+		{
+			NodeList<Name> moduleNames = myModuleExportsStmt.getModuleNames();
+			String[] modules = new String[moduleNames.size()];
+			for(int i = 0; i < modules.length; i++)
+			{
+				modules[i] = moduleNames.get(i).asString();
+			}
+			return modules;
 		}
 	}
 

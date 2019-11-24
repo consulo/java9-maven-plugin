@@ -53,6 +53,12 @@ public class XmlModuleInfo implements ModuleInfo
 			return _package;
 		}
 
+		@Override
+		public String[] getModules()
+		{
+			return new String[0];
+		}
+
 		public void setPackage(String value)
 		{
 			_package = value;

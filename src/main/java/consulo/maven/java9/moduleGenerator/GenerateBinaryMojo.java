@@ -45,7 +45,7 @@ public class GenerateBinaryMojo extends GenerateMojo
 
 		for(ModuleInfo.Export export : target.getExports())
 		{
-			moduleVisitor.visitExport(export.getPackage().replace(".", "/"), 0);
+			moduleVisitor.visitExport(export.getPackage().replace(".", "/"), 0, export.getModules());
 		}
 
 		for(ModuleInfo.Use use : target.getUses())
