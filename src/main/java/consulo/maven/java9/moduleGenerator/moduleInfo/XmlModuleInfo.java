@@ -94,6 +94,12 @@ public class XmlModuleInfo implements ModuleInfo
 	}
 
 	@Override
+	public List<? extends Provider> getProviders()
+	{
+		return Collections.emptyList();
+	}
+
+	@Override
 	public String getName()
 	{
 		return name;

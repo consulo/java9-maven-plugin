@@ -29,11 +29,20 @@ public interface ModuleInfo
 		String getClassName();
 	}
 
+	interface Provider
+	{
+		String getServiceName();
+
+		String[] getImplNames();
+	}
+
 	List<? extends Require> getRequires();
 
 	List<? extends Export> getExports();
 
 	List<? extends Use> getUses();
+
+	List<? extends Provider> getProviders();
 
 	String getName();
 

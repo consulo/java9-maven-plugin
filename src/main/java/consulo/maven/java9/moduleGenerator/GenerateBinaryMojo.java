@@ -10,6 +10,7 @@ import org.objectweb.asm.Opcodes;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Arrays;
 
 /**
  * @author VISTALL
@@ -50,7 +51,12 @@ public class GenerateBinaryMojo extends GenerateMojo
 
 		for(ModuleInfo.Use use : target.getUses())
 		{
-			moduleVisitor.visitUse(use.getClassName().replace(".", "/"));
+			moduleVisitor.visitUse(className(use.getClassName()));
+		}
+
+		for(ModuleInfo.Provider provider : target.getProviders())
+		{
+			moduleVisitor.visitProvide(className(provider.getServiceName()), classNames(provider.getImplNames()));
 		}
 
 		moduleVisitor.visitEnd();
@@ -70,6 +76,16 @@ public class GenerateBinaryMojo extends GenerateMojo
 		{
 			IOUtil.close(out);
 		}
+	}
+
+	private static String className(String name)
+	{
+		return name.replace(".", "/");
+	}
+
+	private static String[] classNames(String... names)
+	{
+		return Arrays.stream(names).map(GenerateBinaryMojo::className).toArray(String[]::new);
 	}
 
 	@Override

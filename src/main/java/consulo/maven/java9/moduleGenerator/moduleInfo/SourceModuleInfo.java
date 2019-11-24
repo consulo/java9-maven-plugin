@@ -85,6 +85,34 @@ public class SourceModuleInfo implements ModuleInfo
 		}
 	}
 
+	private static class ProviderImpl implements Provider
+	{
+		private ModuleProvidesStmt myModuleProvidesStmt;
+
+		private ProviderImpl(ModuleProvidesStmt moduleProvidesStmt)
+		{
+			myModuleProvidesStmt = moduleProvidesStmt;
+		}
+
+		@Override
+		public String getServiceName()
+		{
+			return myModuleProvidesStmt.getName().asString();
+		}
+
+		@Override
+		public String[] getImplNames()
+		{
+			NodeList<Name> moduleNames = myModuleProvidesStmt.getWith();
+			String[] modules = new String[moduleNames.size()];
+			for(int i = 0; i < modules.length; i++)
+			{
+				modules[i] = moduleNames.get(i).asString();
+			}
+			return modules;
+		}
+	}
+
 	private ModuleDeclaration myModuleDeclaration;
 
 	public SourceModuleInfo(ModuleDeclaration moduleDeclaration)
@@ -132,6 +160,20 @@ public class SourceModuleInfo implements ModuleInfo
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public List<? extends Provider> getProviders()
+	{
+		List<Provider> providers = new ArrayList<>();
+		for(ModuleStmt moduleStmt : myModuleDeclaration.getModuleStmts())
+		{
+			if(moduleStmt instanceof ModuleProvidesStmt)
+			{
+				providers.add(new ProviderImpl((ModuleProvidesStmt) moduleStmt));
+			}
+		}
+		return providers;
 	}
 
 	@Override
