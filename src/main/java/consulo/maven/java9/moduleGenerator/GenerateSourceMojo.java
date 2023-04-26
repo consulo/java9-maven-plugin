@@ -1,13 +1,13 @@
 package consulo.maven.java9.moduleGenerator;
 
-import java.io.File;
-import java.io.FileWriter;
-
+import consulo.maven.java9.moduleGenerator.moduleInfo.ModuleInfo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.IOUtil;
-import consulo.maven.java9.moduleGenerator.moduleInfo.ModuleInfo;
+import org.apache.maven.shared.utils.io.FileUtils;
+import org.apache.maven.shared.utils.io.IOUtil;
+
+import java.io.File;
+import java.io.FileWriter;
 
 /**
  * @author VISTALL

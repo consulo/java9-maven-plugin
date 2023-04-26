@@ -3,7 +3,7 @@ package consulo.maven.java9.moduleGenerator;
 import consulo.maven.java9.moduleGenerator.moduleInfo.ModuleInfo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.codehaus.plexus.util.IOUtil;
+import org.apache.maven.shared.utils.io.IOUtil;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.ModuleVisitor;
 import org.objectweb.asm.Opcodes;
