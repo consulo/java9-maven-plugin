@@ -6,45 +6,48 @@ import java.util.List;
  * @author VISTALL
  * @since 2018-09-29
  */
-public interface ModuleInfo
-{
-	interface Require
-	{
-		String getModule();
+public interface ModuleInfo {
+    interface Annotation {
+        String getClassName();
+    }
 
-		boolean isStatic();
+    interface Require {
+        String getModule();
 
-		boolean isTransitive();
-	}
+        boolean isStatic();
 
-	interface Export
-	{
-		String getPackage();
+        boolean isTransitive();
+    }
 
-		String[] getModules();
-	}
+    interface Export {
+        String getPackage();
 
-	interface Use
-	{
-		String getClassName();
-	}
+        String[] getModules();
+    }
 
-	interface Provider
-	{
-		String getServiceName();
+    interface Use {
+        String getClassName();
+    }
 
-		String[] getImplNames();
-	}
+    interface Provider {
+        String getServiceName();
 
-	List<? extends Require> getRequires();
+        String[] getImplNames();
+    }
 
-	List<? extends Export> getExports();
+    default List<? extends Annotation> getAnnotations() {
+        return List.of();
+    }
 
-	List<? extends Use> getUses();
+    List<? extends Require> getRequires();
 
-	List<? extends Provider> getProviders();
+    List<? extends Export> getExports();
 
-	String getName();
+    List<? extends Use> getUses();
 
-	boolean isOpen();
+    List<? extends Provider> getProviders();
+
+    String getName();
+
+    boolean isOpen();
 }

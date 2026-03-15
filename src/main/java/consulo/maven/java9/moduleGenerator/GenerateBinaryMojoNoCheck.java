@@ -8,11 +8,9 @@ import org.apache.maven.plugins.annotations.Mojo;
  * @since 2018-07-24
  */
 @Mojo(name = "generate-binary-module-info-nocheck", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
-public class GenerateBinaryMojoNoCheck extends GenerateBinaryMojo
-{
-	@Override
-	protected boolean isIgnored()
-	{
-		return false;
-	}
+public class GenerateBinaryMojoNoCheck extends GenerateBinaryMojo {
+    @Override
+    protected boolean isIgnored() {
+        return false;
+    }
 }
