@@ -118,7 +118,7 @@ public class SourceModuleInfo implements ModuleInfo {
     public List<? extends Annotation> getAnnotations() {
         List<Annotation> annotations = new ArrayList<>();
         for (AnnotationExpr annotation : myModuleDeclaration.getAnnotations()) {
-            annotations.add(new AnnotationImpl(annotation.resolve().getQualifiedName()));
+            annotations.add(new AnnotationImpl(annotation.getNameAsString()));
         }
         return annotations;
     }
